@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Victor Testolin — Portfólio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14131a;
+    --bg-alt: #1c1b24;
+    --card: #201f2a;
+    --card-hover: #26252f;
+    --line: #2e2c3a;
+    --text: #ebe6f0;
+    --muted: #9a93a8;
+    --accent: #b8a9e0;
+    --accent-soft: #6b5f8a;
+    --accent-2: #8fc4b8;
+    --accent-2-soft: #2d3d39;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(184,169,224,0.07) 1px, transparent 0);
+    background-size: 24px 24px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    width: 800px;
+    height: 800px;
+    top: -400px;
+    right: -200px;
+    background: radial-gradient(circle, rgba(184,169,224,0.12), transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(40px);
+  }
+
+  main { position: relative; z-index: 1; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    backdrop-filter: blur(14px);
+    background: rgba(20, 19, 26, 0.8);
+    border-bottom: 1px solid rgba(46, 44, 58, 0.6);
+  }
+  nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 68px;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .logo .dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    background: var(--accent-2);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    margin-bottom: 2px;
+  }
+  nav ul { display: flex; gap: 32px; list-style: none; }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--accent); }
+
+  /* HERO */
+  header {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 68px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-inner {
+    width: 100%;
+    /* Agora a coluna da direita (foto) sumiu, o texto fica centralizado e espaçoso */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .status {
+    font-size: 13px;
+    color: var(--accent-2);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .status::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--accent-2);
+    border-radius: 50%;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -2px;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+  h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+  .subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--muted);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .subtitle strong { color: var(--text); font-weight: 500; }
+
+  .tagline {
+    font-size: 16px;
+    color: var(--accent);
+    margin-bottom: 40px;
+    font-style: italic;
+    font-family: var(--serif);
+  }
+
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    color: var(--text);
+    background: var(--card);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn:hover {
+    border-color: var(--accent-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(184,169,224,0.12);
+  }
+  .btn.primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .btn.primary:hover {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+    box-shadow: 0 8px 24px rgba(143,196,184,0.2);
+  }
+
+  /* ===== GATINHO ANDANDO NA TELA INICIAL ===== */
+  #walking-cat {
+    position: absolute;
+    width: 140px; 
+    height: 140px;
+    z-index: 3;
+    pointer-events: none;
+    transform-origin: center;
+    will-change: left, top, transform;
+    left: 0;
+    top: 0;
+    /* GIF de um gato laranja andando de lado */
+    background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.15s ease;
+  }
+  
+  /* Classe para virar o gato */
+  .cat-flip { transform: scaleX(-1); }
+
+  /* Classe para trocar a imagem para o gato batendo */
+  .cat-patting {
+    background-image: url('https://media.giphy.com/media/13borq7Zo2kulO/giphy.gif') !important;
+  }
+
+  /* Janela do gato na seção Sobre */
+  .about-cat-window {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    aspect-ratio: 1;
+    background: var(--card);
+    position: relative;
+    background-image: url('https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif'); /* Gato laranja tentando alcançar */
+    background-size: cover;
+    background-position: center;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 0 10px rgba(20,19,26,0.5);
+  }
+  
+  .about-cat-window::after {
+    content: 'O gato quer brincar';
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20,19,26,0.8);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    color: var(--text);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+  .about-cat-window:hover::after { opacity: 1; }
+  .about-cat-window:hover {
+    border-color: var(--accent-2);
+    box-shadow: 0 0 20px rgba(143,196,184,0.2), inset 0 0 0 10px rgba(20,19,26,0.5);
+  }
+
+  /* Seções */
+  section { padding: 110px 0; position: relative; }
+  .section-label {
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-weight: 600;
+    letter-spacing: -1px;
+    margin-bottom: 44px;
+    line-height: 1.15;
+  }
+
+  /* Sobre */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 50px;
+    align-items: center;
+  }
+  .about-text {
+    font-size: 1.1rem;
+    line-height: 1.85;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .about-text strong { color: var(--text); font-weight: 500; }
+
+  /* Projetos */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 22px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.35s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .card:hover {
+    border-color: var(--accent-soft);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    background: var(--card-hover);
+  }
+  .card-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    opacity: 0.85;
+    transition: opacity 0.3s;
+    background: var(--bg-alt);
+  }
+  .card:hover .card-img { opacity: 1; }
+  .card-body { padding: 28px; }
+
+  .card-tag {
+    font-size: 11px;
+    color: var(--accent-2);
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+    display: inline-block;
+    padding: 5px 12px;
+    background: var(--accent-2-soft);
+    border-radius: 100px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .card h3 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+    font-weight: 600;
+  }
+  .card p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .card-stack { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; color: var(--muted); }
+  .card-stack span {
+    padding: 4px 10px;
+    background: var(--bg-alt);
+    border-radius: 100px;
+    font-weight: 400;
+  }
+  .card-arrow {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 34px; height: 34px;
+    background: rgba(20,19,26,0.8);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 15px;
+    transition: all 0.3s;
+    z-index: 2;
+  }
+  .card:hover .card-arrow {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translate(2px, -2px);
+  }
+  .credit {
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.8;
+    margin-top: 16px;
+    display: block;
+    font-style: italic;
+  }
+
+  /* Tecnologias */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .tech-item {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 24px;
+    font-size: 14px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.25s ease;
+    font-weight: 400;
+  }
+  .tech-item:hover {
+    border-color: var(--accent-2-soft);
+    background: var(--bg-alt);
+    transform: translateX(4px);
+  }
+  .tech-item::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent-2);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Contato */
+  .contact-box {
+    background: linear-gradient(135deg, var(--card), var(--bg-alt));
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 64px 44px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-box::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 20%, rgba(184,169,224,0.08), transparent 50%);
+    pointer-events: none;
+  }
+  .contact-box h2 { margin-bottom: 14px; position: relative; }
+  .contact-box p {
+    color: var(--muted);
+    margin-bottom: 36px;
+    font-size: 1.05rem;
+    position: relative;
+    font-weight: 300;
+  }
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    position: relative;
+  }
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    color: var(--text);
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 100px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    transition: all 0.25s ease;
+    font-weight: 400;
+  }
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(184,169,224,0.12);
+  }
+  .contact-link .icon { width: 18px; height: 18px; color: var(--accent); }
+
+  footer {
+    padding: 44px 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    font-weight: 300;
+  }
+
+  /* Scroll Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 820px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-cat-window { max-width: 240px; margin: 0 auto; }
+    #walking-cat { width: 100px; height: 100px; }
+  }
+
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    section { padding: 80px 0; }
+    .contact-box { padding: 44px 24px; }
+    .contact-link { font-size: 0.9rem; padding: 12px 20px; }
+    #walking-cat { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    #walking-cat { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><span class="dot"></span>Victor Testolin</div>
+    <ul>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#tech">Ferramentas</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <header id="hero">
+    <!-- O gatinho que anda pela tela -->
+    <div id="walking-cat"></div>
+
+    <div class="wrap hero-inner">
+      <div>
+        <div class="status">Estudante do ensino médio · dev experimental</div>
+        <h1>Victor<br><em>Testolin</em></h1>
+        <p class="subtitle">
+          Estudante do ensino médio que ama <strong>jogos</strong> e testar coisas aleatórias com código.
+          Mexo com <strong>web, estética, back-end e IA</strong> — juntando tudo como dá.
+        </p>
+        <p class="tagline">Código, câmeras e experimentos aleatórios.</p>
+        <div class="cta-row">
+          <a href="#projetos" class="btn primary">Ver experimentos →</a>
+          <a href="https://github.com/VicTestolaGoat" target="_blank" rel="noopener" class="btn">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="sobre">
+    <div class="wrap reveal">
+      <div class="section-label">Sobre</div>
+      <h2>Quem está no laboratório</h2>
+      <div class="about-grid">
+        <p class="about-text">
+          Sou o <strong>Victor</strong>, estudante do ensino médio e entusiasta de tecnologia.
+          Gosto de pegar ideias aleatórias — um jogo controlado por câmera, um sistema de cadastro,
+          um drone pilotado por conectoma de mosca — e ver até onde consigo levar com código.
+          Estudo <strong>desenvolvimento web, back-end, visão computacional e IA</strong>,
+          sempre misturando estética e experimentação.
+        </p>
+        <!-- Janelinha do gato tentando alcançar o mouse -->
+        <div class="about-cat-window"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="section-label">Projetos</div>
+        <h2>Experimentos em destaque</h2>
+      </div>
+      <div class="projects-grid">
+        <a class="card reveal" href="https://github.com/VicTestolaGoat/FlyDrones" target="_blank" rel="noopener">
+          <img class="card-img" src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=700&q=80" alt="Drone" loading="lazy" />
+          <span class="card-arrow">↗</span>
+          <div class="card-body">
+            <span class="card-tag">Estudo / Exploração</span>
+            <h3>FlyDrones</h3>
+            <p>Conectoma de mosca-drosophila como piloto de drone: câmera → olhos da mosca → cérebro spiking → neurônios descendentes → drone. Demo 3D ao vivo no navegador.</p>
+            <div class="card-stack"><span>Python</span><span>3D</span><span>Neurociência</span></div>
+            <span class="credit">projeto de estudo e exploração</span>
+          </div>
+        </a>
+
+        <a class="card reveal" href="https://github.com/VicTestolaGoat/jogo-da-caverna-com-camera" target="_blank" rel="noopener">
+          <!-- Imagem corrigida para uma caverna real -->
+          <img class="card-img" src="https://images.unsplash.com/photo-1507290439931-a861b5a38200?w=700&q=80" alt="Caverna escura" loading="lazy" />
+          <span class="card-arrow">↗</span>
+          <div class="card-body">
+            <span class="card-tag">Jogo / Visão</span>
+            <h3>Jogo da Caverna com Câmera</h3>
+            <p>Jogo em Python controlado pela webcam: a câmera lê seus movimentos e vira o controle. Diversão analógica com visão computacional.</p>
+            <div class="card-stack"><span>Python</span><span>OpenCV</span><span>Game</span></div>
+          </div>
+        </a>
+
+        <a class="card reveal" href="https://github.com/gustavodrumtonello-dev/inova-suplicy" target="_blank" rel="noopener">
+          <img class="card-img" src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=700&q=80" alt="Câmera" loading="lazy" />
+          <span class="card-arrow">↗</span>
+          <div class="card-body">
+            <span class="card-tag">Projeto em parceria</span>
+            <h3>Inova-Suplicy</h3>
+            <p>Sistema com dashboard, turmas, relatórios e cadastro de alunos — com módulo de câmera para reconhecimento. Feito em parceria com um amigo.</p>
+            <div class="card-stack"><span>Python</span><span>JS</span><span>Back-end</span><span>Visão</span></div>
+            <span class="credit">participante — projeto compartilhado</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="tech">
+    <div class="wrap reveal">
+      <div class="section-label">Ferramentas</div>
+      <h2>O que já explorei</h2>
+      <div class="tech-grid">
+        <div class="tech-item">JavaScript</div>
+        <div class="tech-item">Python</div>
+        <div class="tech-item">Back-end / APIs</div>
+        <div class="tech-item">Frameworks web</div>
+        <div class="tech-item">Banco de dados</div>
+        <div class="tech-item">Visão computacional</div>
+        <div class="tech-item">IA / experimentos</div>
+        <div class="tech-item">Estética & UI</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="wrap reveal">
+      <div class="contact-box">
+        <div class="section-label">Contato</div>
+        <h2>Bora trocar ideia?</h2>
+        <p>Projetos, dúvidas, colaborações ou só um "oi" — me chama por onde preferir.</p>
+        <div class="contact-list">
+          <a href="mailto:victestola@gmail.com" class="contact-link">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+            victestola@gmail.com
+          </a>
+          <a href="https://wa.me/5546999771501" target="_blank" rel="noopener" class="contact-link">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            +55 46 99977-1501
+          </a>
+          <a href="https://instagram.com/lovestruck.vic" target="_blank" rel="noopener" class="contact-link">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            @lovestruck.vic
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      © 2026 Victor Testolin — feito com código, café e experimentos aleatórios.
+    </div>
+  </footer>
+</main>
+
+<script>
+  // ====== GATINHO ======
+  (function () {
+    const hero = document.getElementById('hero');
+    const cat = document.getElementById('walking-cat');
+    if (!hero || !cat) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const SIZE = 140;
+    let heroRect = hero.getBoundingClientRect();
+
+    let cx = heroRect.width * 0.25;
+    let cy = heroRect.height * 0.7;
+
+    let wanderX = cx;
+    let wanderY = cy;
+    let wanderTimer = 0;
+
+    let mouse = { x: cx, y: cy, inside: false };
+
+    function updateHeroRect() {
+      heroRect = hero.getBoundingClientRect();
+    }
+    window.addEventListener('resize', updateHeroRect);
+    window.addEventListener('scroll', updateHeroRect, { passive: true });
+
+    hero.addEventListener('mousemove', (e) => {
+      const r = hero.getBoundingClientRect();
+      mouse.x = e.clientX - r.left;
+      mouse.y = e.clientY - r.top;
+      mouse.inside = true;
+    });
+    hero.addEventListener('mouseleave', () => { mouse.inside = false; });
+
+    function pickWander() {
+      wanderX = 40 + Math.random() * (heroRect.width - 80);
+      wanderY = 80 + Math.random() * (heroRect.height - 160);
+      wanderTimer = 60 + Math.random() * 90;
+    }
+    pickWander();
+
+    function step() {
+      updateHeroRect();
+
+      let targetX, targetY, speed;
+      const dxMouse = mouse.x - cx;
+      const dyMouse = mouse.y - cy;
+      const distMouse = Math.hypot(dxMouse, dyMouse);
+
+      if (mouse.inside && distMouse < 180) {
+        cat.classList.add('cat-patting');
+        
+        if (mouse.x > cx) cat.classList.remove('cat-flip');
+        else cat.classList.add('cat-flip');
+
+        targetX = cx;
+        targetY = cy;
+        speed = 0;
+      } else {
+        cat.classList.remove('cat-patting');
+
+        if (mouse.inside && distMouse < 400) {
+          targetX = mouse.x;
+          targetY = mouse.y;
+          speed = 3.5;
+        } else {
+          wanderTimer--;
+          if (wanderTimer <= 0) pickWander();
+          targetX = wanderX;
+          targetY = wanderY;
+          speed = 0.9;
+        }
+      }
+
+      const dx = targetX - cx;
+      const dy = targetY - cy;
+      const dist = Math.hypot(dx, dy) || 1;
+
+      if (speed > 0) {
+        const vx = (dx / dist) * Math.min(speed, dist);
+        const vy = (dy / dist) * Math.min(speed, dist);
+        cx += vx;
+        cy += vy;
+
+        if (vx > 0.5) cat.classList.remove('cat-flip');
+        else if (vx < -0.5) cat.classList.add('cat-flip');
+      }
+
+      const pad = SIZE / 2;
+      cx = Math.max(pad, Math.min(heroRect.width - pad, cx));
+      cy = Math.max(pad, Math.min(heroRect.height - pad, cy));
+
+      cat.style.left = (cx - SIZE / 2) + 'px';
+      cat.style.top = (cy - SIZE / 2) + 'px';
+
+      requestAnimationFrame(step);
+    }
+    step();
+  })();
+
+  // ====== SCROLL REVEAL ======
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+</script>
+</body>
+</html>
